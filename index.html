@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title class="lang">SQL-Injection - Das SQL-Injection-Lernspiel</title>
+    <link rel="icon" href="img/floww.png">
+    <link href="css/stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="highlight/styles/base16/railscasts.min.css">
+    <link rel=" stylesheet" type="text/css" href="joyride-2.0.0/joyride-2.1.css">
+</head>
+<body>
+    <ol id="joyRideTipContent">
+      <li data-class="animal" data-text="Weiter" class="custom" data-options="tipLocation:top;" id="first">
+        <br>
+        <h1 class="lang">Welcome in SQL-Injection!</h1><br><br>
+            <h3 class="lang">%joyride_info1</h3><br>
+      </li>
+        <li data-id="insect" data-text="Weiter" class="custom" data-options="tipLocation:top;" id="sec">
+          <br>
+          <h3 class="lang">%joyride_info2</h3>
+        </li>
+        <li data-class="form-signin" data-text="Weiter" class="custom" data-options="tipLocation:left;" >
+          <br><br>
+          <h3 class="lang">%joyride_login</h3><br><br>
+        </li>
+        <li data-id="behindscene_btn" data-text="Weiter" data-options="tipLocation:top-right;" >
+          <br>
+          <h3 class="lang">%joyride_details</h3>
+          <br>
+        </li>
+        <li data-id="behindscene_btn" data-text="Weiter" class="joyride-tip-guide2" data-options="tipLocation:top-right;" >
+            <br>
+            <h3 class="lang">%joyride_details</h3>
+            <br>
+          </li>
+        <li data-id="tipp_btn" data-button="Weiter" class="joyride-tip-guide2" data-options="tipLocation:top;" >
+          <br>
+          <h3 class="lang">%joyride_hints1</h3><br>
+        
+        </li>
+        <li data-id="hints" data-button="Weiter"   class="joyride-tip-guide3" data-options="tipLocation:bottom;" >
+          <br>
+          <h3 class="lang">%joyride_hints2</h3><br>
+        
+        </li>
+
+        <li data-id="menu" data-button="Weiter"  class="joyride-tip-guide4"  data-options="tipLocation:bottom;" >
+          <br>
+          <h3 class="lang">%joyride_menu</h3><br>
+        </li>
+
+        <li data-id="insect" data-text="Weiter" class="custom" data-options="tipLocation:top-right;" >
+          <br>
+          <h3 class="lang">%joyride_info3</h3>
+        </li>
+        <li data-id="insect" data-text="Weiter" class="custom" data-options="tipLocation:top-right;" id="last">
+          <br>
+          <h3 class="lang">%joyride_info4</h3>
+        </li>
+        <li data-id="insect" data-text="Weiter" class="custom" data-options="tipLocation:top-right;" id="last">
+          <br>
+          <h3 class="lang">%joyride_info5</h3>
+        </li>
+      </ol>
+
+    <div class='topp'>
+       
+        <nav>
+          <ul>
+            <li  id='menu'>
+              <a onclick='show_menu()' href='#'> <img id='info' src="img/menu.png"></a>
+              <ul id="menu_ul">
+			<li onClick="window.location.reload(true);"><a href='#' class="lang">Spiel neustarten</a></li>
+      <li><a href='#' onclick="show_lan();" class="lang">Sprache ändern</a>
+
+               
+                    <ul id="change_language">
+                      <li><a href='index9ed2.html?lang=en'>English</a></li>
+                      <li><a href='index3322.html?lang=de'>Deutsch</a></li>
+                    </ul>
+                  </li>
+              </ul>
+            </li>
+          </ul>
+  
+      </nav>
+
+        <h2 id='lvl'>Level: 1</h2>
+        <h2 id='hints'><span class="lang">Tipps</span>: 
+            <img id='light1' src="img/light.png" />
+            <img id='light2' src="img/light.png"/>
+            <img id='light3' src="img/light.png"/></h2>
+        <h2 id='title' class="lang">SQL-Injection</h2>
+    </div>
+    <div class='leftside'>
+
+        <div class='sprechblase'>
+            <h2 id='speakbubble_h2' class="lang">Genug geredet, los gehts!</h2>
+            <h3>
+            <h3 id='speakbubble_h3'></h3>
+            
+                
+            </h3>
+            <button class="btn btn-lg btn-primary btn-block lang" id='next_btn' type="submit" onclick="speakbubble_next()">Weiter</button>
+        
+
+        </div>
+
+        <div class='animal'>
+            <img id='insect' src="img/bee.png"/>
+        </div>
+
+    </div>
+    <div class='rightside'>
+        <div class='rstop'>
+
+            <div class="wrapper">
+                <form class="form-signin">
+                    
+                  <h2 id='loginlabel' class="form-signin-heading lang">Bitte einloggen</h2>
+                  <input type="text" class="form-control lang" name="username" placeholder="Benutzername" id='username' required="" oninput="generate_query(); hljs.highlightAll();" onKeyPress="onEnter(event); generate_query(); hljs.highlightAll();" />
+                  <input type="password" class="form-control lang" name="password" placeholder="Passwort" id='password' required="" oninput="generate_query(); hljs.highlightAll();" onKeyPress="onEnter(event); generate_query();hljs.highlightAll();"/>
+                  <button class="btn btn-lg btn-primary btn-block lang" id="login_btn" type="button" onclick="try_login(); generate_query();hljs.highlightAll();document.getElementsByClassName('joyride-close-tip')[0].click();">Einloggen</button>
+                    
+                  <input type="text" class="form-control" name="suchleiste" placeholder="" id='suchleiste' required="" oninput="generate_query(); hljs.highlightAll();" onKeyPress="onEnter(event); generate_query();hljs.highlightAll();"/>
+                  <button class="btn btn-lg btn-primary btn-block lang" id="suche_btn" type="button" onclick="try_login(); generate_query();hljs.highlightAll();">Suchen</button>
+                  <input type="text" class="form-control" name="url" placeholder="" id='url' required="" oninput="generate_query(); hljs.highlightAll();" onKeyPress="onEnter(event);generate_query(); hljs.highlightAll();" />
+                  <div id='url_output'>
+                    <img id='sneaker_img' src="img/sneaker.png"/>
+                      <h4 id='marke'><strong><span class="lang">Marke</span>: </strong>Nicke</h4>
+                      <h4 id='groesse'><strong><span class="lang">Größe</span>: </strong>40 </h4>
+                      <h4 id= 'price'><strong><span class="lang">Preis</span>: </strong>80<span class="lang">€</span></h4>
+                  </div>
+                  <table id='suchergebnisse'></table>
+                  <button class="btn btn-lg btn-primary btn-block lang" id="logout_btn" type="button" onclick="change_category(); generate_query();hljs.highlightAll();">Ausloggen</button>
+                </form>
+              </div>
+        </div>
+        
+        <div class='rsbottom'>
+            <button class="btn btn-lg btn-primary btn-block lang" id='behindscene_btn' type="submit" onclick="show_behindscene(); generate_query(); hljs.highlightAll();">Hintergrunddetails anzeigen</button>
+            <button class="btn btn-lg btn-primary btn-block lang" id='tipp_btn' type="submit" onclick="show_hints()">Tipp einblenden</button>
+            <div class='btnbox' id='btnboxre'>
+                <p class='btnboxtxt'>
+                </p>
+            </div>
+            <div class='rsbtmleft'>
+            </div>
+                <div class='btnbox' id='btnboxli'>
+                    <p class='btnboxtxt'>
+                        <span class="lang">Hintergrund-Code</span>
+                        <label class="switch">
+                            <input id='switcher' onclick="change_codemode()" type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="lang">Erzeugte SQL-Query</span>
+                    </p>
+                    <pre id="codetxt"><code class="hljs language-sql"></code></pre>
+
+                    <pre id="behindcodelogin"><code overflow="auto">public static User login(String uname, String pw) throws InternalServerErrorException {
+ try {
+  conn = DriverManager.getConnection(...);
+  Statement stmt = conn.createStatement();
+  ResultSet rs = stmt.executeQuery("SELECT <span class="lang">benutzername</span> " + 
+                 "FROM <span class="lang">benutzer</span> " +
+                 "WHERE <span class="lang">benutzername</span> ='" + uname + "' " +
+                 "AND <span class="lang">passwort</span> ='"+ md5(pw) + "';");
+  if (rs.next()){
+    return new User(rs.getString("<span class="lang">benutzername</span>"));
+  }
+  return null;
+ }
+ catch (SQLException e) {
+  throw new InternalServerErrorException();
+ }
+}
+//...</code></pre>
+                   <pre id="behindcodesearch"><code >def print_search(user_input):
+  try:   
+    conn = psycopg2.connect(...)
+    cur = conn.cursor()
+    cur.execute("SELECT <span class="lang">produkt_id</span>, <span class="lang">marke</span>, <span class="lang">groesse</span>, <span class="lang">preis</span> "
+                "FROM <span class="lang">schuhe</span> "
+                "WHERE <span class="lang">marke</span>='" + user_input + "';")
+    row = cur.fetchone()
+    while row is not None:
+      print("&lt;tr&gt;")
+      for col in row: print("&lt;td&gt;"+str(col)+"&lt;/td&gt;")
+      print("&lt;/tr&gt;")
+      row = cur.fetchone()
+      cur.close()
+  except (MySQLdb.Error, MySQLdb.Warning) as e:
+    print("Internal Server Error")
+# ...
+</code></pre>
+                  <pre id="behindcodeurl"><code>$conn = new PDO(...);
+$qu = "SELECT <span class="lang">marke</span>, <span class="lang">groesse</span>, <span class="lang">preis</span> ";
+$qu .= "FROM <span class="lang">schuhe</span> ";
+$qu .= "WHERE <span class="lang">produkt_id</span>=".$_GET["<span class="lang">produkt_id</span>"];
+$stmt = $conn->query($qu);
+$res = $stmt->fetch();
+
+echo &lt;&lt;&lt;OUTPUT
+&lt;b&gt;<span class="lang">Marke</span>:&lt;/b&gt; {$res["<span class="lang">marke</span>"]}&lt;br&gt;
+&lt;b&gt;<span class="lang">Größe</span>:&lt;/b&gt; {$res["<span class="lang">groesse</span>"]}&lt;br&gt;
+&lt;b&gt;<span class="lang">Preis</span>:&lt;/b&gt; {$res["<span class="lang">preis</span>"]}€
+OUTPUT;
+</code></pre>
+                </div>
+       
+        </div>
+
+        
+    </div>
+        <div id='modal' class='modal'>
+            <div class="modal-content">
+                <span class="close" onclick="close_modal()">&times;</span>
+                <p>
+                </p>
+              
+                </div>
+    </div>
+
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="joyride-2.0.0/jquery-1.10.1.js"></script>
+    <script src="joyride-2.0.0/jquery.joyride-2.1.js"></script>
+    <script type="text/javascript" src="joyride-2.0.0/jquery.cookie.js"></script>
+    <script type="text/javascript" src="joyride-2.0.0/modernizr.mq.js"></script>
+    <script type="text/javascript" src="js/alasql.min.js"></script>
+    <script type="text/javascript" src="js/language.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+
+    <script type="text/javascript" defer>
+      var lang_code = new URLSearchParams(window.location.search).get("lang");
+      if(lang_code == null) { 
+        lang_code = window.navigator.language.slice(0, 2);
+      }
+      change_language(lang_code);
+    </script>
+
+    <script>
+      $(window).load(function() {
+        $('#joyRideTipContent').joyride({
+          autoStart : true,
+          postStepCallback : function (index, tip) {
+          if (index == 2) {
+            $(this).joyride('set_li', false, 1);
+          }
+        },
+        modal:true,
+        expose: true,
+        postRideCallback: function (){
+          $('.sprechblase').show();
+          $('.animal').css('margin-top',"0%");
+          $("#insect").attr("src","img/happybee.png");
+        }
+        });
+        var lang_code = new URLSearchParams(window.location.search).get("lang");
+        if(lang_code == null) { 
+          lang_code = window.navigator.language.slice(0, 2);
+        }
+        change_language(lang_code);
+      });
+    </script>
+</body>
+</html>
+</html>
