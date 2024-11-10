@@ -13,7 +13,7 @@
 
   $.cookie = function (key, value, options) {
 
-    // key and at least value given, set cookie...
+    
     if (value !== undefined && !/Object/.test(Object.prototype.toString.call(value))) {
       options = $.extend({}, $.cookie.defaults, options);
 
@@ -30,14 +30,14 @@
 
       return (document.cookie = [
         encodeURIComponent(key), '=', options.raw ? value : encodeURIComponent(value),
-        options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+        options.expires ? '; expires=' + options.expires.toUTCString() : '', 
         options.path    ? '; path=' + options.path : '',
         options.domain  ? '; domain=' + options.domain : '',
         options.secure  ? '; secure' : ''
       ].join(''));
     }
 
-    // key and possibly options given, get cookie...
+    
     options = value || $.cookie.defaults || {};
     var decode = options.raw ? raw : decoded;
     var cookies = document.cookie.split('; ');
