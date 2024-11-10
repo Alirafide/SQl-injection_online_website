@@ -85,7 +85,7 @@ body {
   padding: 2% 2% 5% 5%;
 }
 
-/* Mobile */
+
 @media only screen and (max-width: 767px) {
   .joyride-tip-guide {
     width: 95% !important;
@@ -100,16 +100,16 @@ body {
 }
 
 
-/* Add a little css triangle pip, older browser just miss out on the fanciness of it */
+
 .joyride-tip-guide span.joyride-nub {
   display: block;
   position: absolute;
   left: 75%;
   width: 0;
   height: 0;
-  /* border: solid 15px; */
+ 
   border: solid 30px;
-  /* border: solid 14px; */
+  
 }
 .joyride-tip-guide4 span.joyride-nub {
   display: block;
@@ -117,9 +117,9 @@ body {
   left: 3%;
   width: 0;
   height: 0;
-  /* border: solid 15px; */
+ 
   border: solid 30px;
-  /* border: solid 14px; */
+ 
 }
 .joyride-tip-guide3 span.joyride-nub {
   display: block;
@@ -127,19 +127,13 @@ body {
   left: 65%;
   width: 0;
   height: 0;
-  /* border: solid 15px; */
+ 
   border: solid 30px;
-  /* border: solid 14px; */
+  
 }
 
 .joyride-tip-guide span.joyride-nub.top {
-  /*
-  IE7/IE8 Don't support rgba so we set the fallback
-  border color here. However, IE7/IE8 are also buggy
-  in that the fallback color doesn't work for
-  border-bottom-color so here we set the border-color
-  and override the top,left,right colors below.
-  */
+
   border-color: #000;
   border-color: rgba(0,0,0,0.75) !important;
   border-top-color: transparent !important;
@@ -214,7 +208,7 @@ body {
   right: 28px;
 }
 
-/* Typography */
+
 .joyride-tip-guide h1,.joyride-tip-guide h2,.joyride-tip-guide h3,.joyride-tip-guide h4,.joyride-tip-guide h5,.joyride-tip-guide h6 {
   line-height: 1.25;
   margin: 0;
@@ -242,7 +236,7 @@ body {
   border-bottom: none;
 }
 
-/* Button Style */
+
 .joyride-tip-guide .joyride-next-tip {
   width: 45%;
   float: right;
@@ -251,14 +245,12 @@ body {
   
   font-size: 20px;
   text-align: center;
-  /* text-decoration: none;
-  color: rgb(255,255,255); */
+
   background-color: rgba(122, 137, 194,1);
   border: 1px solid gray;
   box-sizing: border-box;
   border-radius: 4px 4px 4px 4px;
-  /* border: solid 1px rgb(0,60,180);
-  background: rgb(0,99,255); */
+ 
 
 }
 
