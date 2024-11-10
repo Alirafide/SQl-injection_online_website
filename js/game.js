@@ -555,7 +555,7 @@ function change_category(){
       document.getElementById("url_output").style.display = 'block';
       document.getElementById("sneaker_img").style.display = 'block';
       document.getElementsByClassName("form-signin")[0].style.maxWidth="60%";
-      document.getElementById('url').value = "https://sql-insekten.example.com/index.php?"+translate("produkt_id")+"=0";
+      document.getElementById('url').value = "https://sql-Injection.example.com/index.php?"+translate("produkt_id")+"=0";
       document.getElementById("marke").innerHTML= "<strong>"+translate("Marke")+":   </strong> Nicke"
       document.getElementById("groesse").innerHTML= "<strong>"+translate("Größe")+":   </strong> 40";
       document.getElementById("price").innerHTML= "<strong>"+translate("Preis")+":     </strong> 80"+translate("€");
@@ -871,7 +871,7 @@ function answer(correctanswer){
             document.getElementById('username').value="";
             document.getElementById('password').value = "";
             document.getElementById('suchleiste').value = "";
-            document.getElementById('url').value = "https://sql-insekten.example.com/index.php?"+translate("produkt_id")+"=0";
+            document.getElementById('url').value = "https://sql-Injection.example.com/index.php?"+translate("produkt_id")+"=0";
             document.getElementById("marke").innerHTML= "<strong>"+translate("Marke")+":   </strong> Nicke"
             document.getElementById("groesse").innerHTML= "<strong>"+translate("Größe")+":   </strong> 40";
             document.getElementById("price").innerHTML= "<strong>"+translate("Preis")+":     </strong> 80"+translate("€")+"";
