@@ -3,36 +3,35 @@
 
 
 var
-	// The deferred used on DOM ready
+	
 	readyList,
 
-	// A central reference to the root jQuery(document)
+	
 	rootjQuery,
 
-	// Support: IE<10
-	// For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
+	
 	core_strundefined = typeof undefined,
 
-	// Use the correct document accordingly with window argument (sandbox)
+	
 	location = window.location,
 	document = window.document,
 	docElem = document.documentElement,
 
-	// Map over jQuery in case of overwrite
+	
 	_jQuery = window.jQuery,
 
-	// Map over the $ in case of overwrite
+	
 	_$ = window.$,
 
-	// [[Class]] -> type pairs
+	
 	class2type = {},
 
-	// List of deleted data cache ids, so we can reuse them
+	
 	core_deletedIds = [],
 
 	core_version = "1.10.1",
 
-	// Save a reference to some core methods
+	
 	core_concat = core_deletedIds.concat,
 	core_push = core_deletedIds.push,
 	core_slice = core_deletedIds.slice,
@@ -41,54 +40,53 @@ var
 	core_hasOwn = class2type.hasOwnProperty,
 	core_trim = core_version.trim,
 
-	// Define a local copy of jQuery
+	
 	jQuery = function( selector, context ) {
-		// The jQuery object is actually just the init constructor 'enhanced'
+		
 		return new jQuery.fn.init( selector, context, rootjQuery );
 	},
 
-	// Used for matching numbers
+	
 	core_pnum = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,
 
-	// Used for splitting on whitespace
+	
 	core_rnotwhite = /\S+/g,
 
-	// Make sure we trim BOM and NBSP (here's looking at you, Safari 5.0 and IE)
+	
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
-	// A simple way to check for HTML strings
-	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
-	// Strict HTML recognition (#11290: must start with <)
+	
+	
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
-	// Match a standalone tag
+	
 	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
 
-	// JSON RegExp
+	
 	rvalidchars = /^[\],:{}\s]*$/,
 	rvalidbraces = /(?:^|:|,)(?:\s*\[)+/g,
 	rvalidescape = /\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g,
 	rvalidtokens = /"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g,
 
-	// Matches dashed string for camelizing
+	
 	rmsPrefix = /^-ms-/,
 	rdashAlpha = /-([\da-z])/gi,
 
-	// Used by jQuery.camelCase as callback to replace()
+	
 	fcamelCase = function( all, letter ) {
 		return letter.toUpperCase();
 	},
 
-	// The ready event handler
+	
 	completed = function( event ) {
 
-		// readyState === "complete" is good enough for us to call the dom ready in oldIE
+		
 		if ( document.addEventListener || event.type === "load" || document.readyState === "complete" ) {
 			detach();
 			jQuery.ready();
 		}
 	},
-	// Clean-up method for dom ready events
+	
 	detach = function() {
 		if ( document.addEventListener ) {
 			document.removeEventListener( "DOMContentLoaded", completed, false );
@@ -101,50 +99,50 @@ var
 	};
 
 jQuery.fn = jQuery.prototype = {
-	// The current version of jQuery being used
+	
 	jquery: core_version,
 
 	constructor: jQuery,
 	init: function( selector, context, rootjQuery ) {
 		var match, elem;
 
-		// HANDLE: $(""), $(null), $(undefined), $(false)
+		
 		if ( !selector ) {
 			return this;
 		}
 
-		// Handle HTML strings
+		
 		if ( typeof selector === "string" ) {
 			if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
-				// Assume that strings that start and end with <> are HTML and skip the regex check
+				
 				match = [ null, selector, null ];
 
 			} else {
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
+			
 			if ( match && (match[1] || !context) ) {
 
-				// HANDLE: $(html) -> $(array)
+				
 				if ( match[1] ) {
 					context = context instanceof jQuery ? context[0] : context;
 
-					// scripts is true for back-compat
+					
 					jQuery.merge( this, jQuery.parseHTML(
 						match[1],
 						context && context.nodeType ? context.ownerDocument || context : document,
 						true
 					) );
 
-					// HANDLE: $(html, props)
+					
 					if ( rsingleTag.test( match[1] ) && jQuery.isPlainObject( context ) ) {
 						for ( match in context ) {
-							// Properties of context are called as methods if possible
+							
 							if ( jQuery.isFunction( this[ match ] ) ) {
 								this[ match ]( context[ match ] );
 
-							// ...and otherwise set as attributes
+							
 							} else {
 								this.attr( match, context[ match ] );
 							}
@@ -153,20 +151,18 @@ jQuery.fn = jQuery.prototype = {
 
 					return this;
 
-				// HANDLE: $(#id)
+				
 				} else {
 					elem = document.getElementById( match[2] );
 
-					// Check parentNode to catch when Blackberry 4.6 returns
-					// nodes that are no longer in the document #6963
+					
 					if ( elem && elem.parentNode ) {
-						// Handle the case where IE and Opera return items
-						// by name instead of ID
+						
 						if ( elem.id !== match[2] ) {
 							return rootjQuery.find( selector );
 						}
 
-						// Otherwise, we inject the element directly into the jQuery object
+						
 						this.length = 1;
 						this[0] = elem;
 					}
@@ -176,24 +172,23 @@ jQuery.fn = jQuery.prototype = {
 					return this;
 				}
 
-			// HANDLE: $(expr, $(...))
+			
 			} else if ( !context || context.jquery ) {
 				return ( context || rootjQuery ).find( selector );
 
-			// HANDLE: $(expr, context)
-			// (which is just equivalent to: $(context).find(expr)
+			
 			} else {
 				return this.constructor( context ).find( selector );
 			}
 
-		// HANDLE: $(DOMElement)
+		
 		} else if ( selector.nodeType ) {
 			this.context = this[0] = selector;
 			this.length = 1;
 			return this;
 
-		// HANDLE: $(function)
-		// Shortcut for document ready
+		
+		
 		} else if ( jQuery.isFunction( selector ) ) {
 			return rootjQuery.ready( selector );
 		}
@@ -206,52 +201,48 @@ jQuery.fn = jQuery.prototype = {
 		return jQuery.makeArray( selector, this );
 	},
 
-	// Start with an empty selector
+	
 	selector: "",
 
-	// The default length of a jQuery object is 0
+	
 	length: 0,
 
 	toArray: function() {
 		return core_slice.call( this );
 	},
 
-	// Get the Nth element in the matched element set OR
-	// Get the whole matched element set as a clean array
+	
 	get: function( num ) {
 		return num == null ?
 
-			// Return a 'clean' array
+			
 			this.toArray() :
 
-			// Return just the object
+			
 			( num < 0 ? this[ this.length + num ] : this[ num ] );
 	},
 
-	// Take an array of elements and push it onto the stack
-	// (returning the new matched element set)
+	
 	pushStack: function( elems ) {
 
-		// Build a new jQuery matched element set
+		
 		var ret = jQuery.merge( this.constructor(), elems );
 
-		// Add the old object onto the stack (as a reference)
+		
 		ret.prevObject = this;
 		ret.context = this.context;
 
-		// Return the newly-formed element set
+		
 		return ret;
 	},
 
-	// Execute a callback for every element in the matched set.
-	// (You can seed the arguments with an array of args, but this is
-	// only used internally.)
+	
 	each: function( callback, args ) {
 		return jQuery.each( this, callback, args );
 	},
 
 	ready: function( fn ) {
-		// Add the callback
+		
 		jQuery.ready.promise().done( fn );
 
 		return this;
@@ -285,14 +276,13 @@ jQuery.fn = jQuery.prototype = {
 		return this.prevObject || this.constructor(null);
 	},
 
-	// For internal use only.
-	// Behaves like an Array's method, not like a jQuery method.
+	
 	push: core_push,
 	sort: [].sort,
 	splice: [].splice
 };
 
-// Give the init function the jQuery prototype for later instantiation
+
 jQuery.fn.init.prototype = jQuery.fn;
 
 jQuery.extend = jQuery.fn.extend = function() {
@@ -302,39 +292,39 @@ jQuery.extend = jQuery.fn.extend = function() {
 		length = arguments.length,
 		deep = false;
 
-	// Handle a deep copy situation
+	
 	if ( typeof target === "boolean" ) {
 		deep = target;
 		target = arguments[1] || {};
-		// skip the boolean and the target
+		
 		i = 2;
 	}
 
-	// Handle case when target is a string or something (possible in deep copy)
+	
 	if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
 		target = {};
 	}
 
-	// extend jQuery itself if only one argument is passed
+	
 	if ( length === i ) {
 		target = this;
 		--i;
 	}
 
 	for ( ; i < length; i++ ) {
-		// Only deal with non-null/undefined values
+		
 		if ( (options = arguments[ i ]) != null ) {
-			// Extend the base object
+			
 			for ( name in options ) {
 				src = target[ name ];
 				copy = options[ name ];
 
-				// Prevent never-ending loop
+				
 				if ( target === copy ) {
 					continue;
 				}
 
-				// Recurse if we're merging plain objects or arrays
+				
 				if ( deep && copy && ( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) ) ) {
 					if ( copyIsArray ) {
 						copyIsArray = false;
@@ -344,10 +334,10 @@ jQuery.extend = jQuery.fn.extend = function() {
 						clone = src && jQuery.isPlainObject(src) ? src : {};
 					}
 
-					// Never move original objects, clone them
+					
 					target[ name ] = jQuery.extend( deep, clone, copy );
 
-				// Don't bring in undefined values
+				
 				} else if ( copy !== undefined ) {
 					target[ name ] = copy;
 				}
@@ -355,13 +345,12 @@ jQuery.extend = jQuery.fn.extend = function() {
 		}
 	}
 
-	// Return the modified object
+	
 	return target;
 };
 
 jQuery.extend({
-	// Unique for each copy of jQuery on the page
-	// Non-digits removed to match rinlinejQuery
+	
 	expando: "jQuery" + ( core_version + Math.random() ).replace( /\D/g, "" ),
 
 	noConflict: function( deep ) {
@@ -376,14 +365,13 @@ jQuery.extend({
 		return jQuery;
 	},
 
-	// Is the DOM ready to be used? Set to true once it occurs.
+	
 	isReady: false,
 
-	// A counter to track how many items to wait for before
-	// the ready event fires. See #6781
+	
 	readyWait: 1,
 
-	// Hold (or release) the ready event
+	
 	holdReady: function( hold ) {
 		if ( hold ) {
 			jQuery.readyWait++;
@@ -392,10 +380,10 @@ jQuery.extend({
 		}
 	},
 
-	// Handle when the DOM is ready
+	
 	ready: function( wait ) {
 
-		// Abort if there are pending holds or we're already ready
+		
 		if ( wait === true ? --jQuery.readyWait : jQuery.isReady ) {
 			return;
 		}
@@ -981,18 +969,9 @@ function isArraylike( obj ) {
 		typeof length === "number" && length > 0 && ( length - 1 ) in obj );
 }
 
-// All jQuery objects should point back to these
+
 rootjQuery = jQuery(document);
-/*!
- * Sizzle CSS Selector Engine v1.9.4-pre
- * http://sizzlejs.com/
- *
- * Copyright 2013 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2013-05-27
- */
+
 (function( window, undefined ) {
 
 var i,
@@ -1316,21 +1295,16 @@ function assert( fn ) {
 	} catch (e) {
 		return false;
 	} finally {
-		// Remove from its parent by default
+		
 		if ( div.parentNode ) {
 			div.parentNode.removeChild( div );
 		}
-		// release memory in IE
+		
 		div = null;
 	}
 }
 
-/**
- * Adds the same handler for all of the specified attrs
- * @param {String} attrs Pipe-separated list of attributes
- * @param {Function} handler The method that will be applied if the test fails
- * @param {Boolean} test The result of a test. If true, null will be set as the handler in leiu of the specified handler
- */
+
 function addHandle( attrs, handler, test ) {
 	attrs = attrs.split("|");
 	var current,
@@ -1338,57 +1312,36 @@ function addHandle( attrs, handler, test ) {
 		setHandle = test ? null : handler;
 
 	while ( i-- ) {
-		// Don't override a user's handler
+		
 		if ( !(current = Expr.attrHandle[ attrs[i] ]) || current === handler ) {
 			Expr.attrHandle[ attrs[i] ] = setHandle;
 		}
 	}
 }
 
-/**
- * Fetches boolean attributes by node
- * @param {Element} elem
- * @param {String} name
- */
+
 function boolHandler( elem, name ) {
-	// XML does not need to be checked as this will not be assigned for XML documents
+	
 	var val = elem.getAttributeNode( name );
 	return val && val.specified ?
 		val.value :
 		elem[ name ] === true ? name.toLowerCase() : null;
 }
 
-/**
- * Fetches attributes without interpolation
- * http://msdn.microsoft.com/en-us/library/ms536429%28VS.85%29.aspx
- * @param {Element} elem
- * @param {String} name
- */
+
 function interpolationHandler( elem, name ) {
 	// XML does not need to be checked as this will not be assigned for XML documents
 	return elem.getAttribute( name, name.toLowerCase() === "type" ? 1 : 2 );
 }
 
-/**
- * Uses defaultValue to retrieve value in IE6/7
- * @param {Element} elem
- * @param {String} name
- */
+
 function valueHandler( elem ) {
-	// Ignore the value *property* on inputs by using defaultValue
-	// Fallback to Sizzle.attr by returning undefined where appropriate
-	// XML does not need to be checked as this will not be assigned for XML documents
+	
 	if ( elem.nodeName.toLowerCase() === "input" ) {
 		return elem.defaultValue;
 	}
 }
 
-/**
- * Checks document order of two siblings
- * @param {Element} a
- * @param {Element} b
- * @returns Returns -1 if a precedes b, 1 if a follows b
- */
 function siblingCheck( a, b ) {
 	var cur = b && a,
 		diff = cur && a.nodeType === 1 && b.nodeType === 1 &&
@@ -2202,22 +2155,17 @@ Expr = Sizzle.selectors = {
 		},
 
 		"PSEUDO": function( pseudo, argument ) {
-			// pseudo-class names are case-insensitive
-			// http://www.w3.org/TR/selectors/#pseudo-classes
-			// Prioritize by case sensitivity in case custom pseudos are added with uppercase letters
-			// Remember that setFilters inherits from pseudos
+			
 			var args,
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
 					Sizzle.error( "unsupported pseudo: " + pseudo );
 
-			// The user may use createPseudo to indicate that
-			// arguments are needed to create the filter function
-			// just as Sizzle does
+			
 			if ( fn[ expando ] ) {
 				return fn( argument );
 			}
 
-			// But maintain support for old signatures
+			
 			if ( fn.length > 1 ) {
 				args = [ pseudo, pseudo, "", argument ];
 				return Expr.setFilters.hasOwnProperty( pseudo.toLowerCase() ) ?
@@ -2351,11 +2299,7 @@ Expr = Sizzle.selectors = {
 
 		// Contents
 		"empty": function( elem ) {
-			// http://www.w3.org/TR/selectors/#empty-pseudo
-			// :empty is only affected by element nodes and content nodes(including text(3), cdata(4)),
-			//   not comment, processing instructions, or others
-			// Thanks to Diego Perini for the nodeName shortcut
-			//   Greater than "@" means alpha characters (specifically not starting with "#" or "?")
+			
 			for ( elem = elem.firstChild; elem; elem = elem.nextSibling ) {
 				if ( elem.nodeName > "@" || elem.nodeType === 3 || elem.nodeType === 4 ) {
 					return false;
@@ -3489,13 +3433,7 @@ jQuery.support = (function( support ) {
 
 		body.appendChild( container ).appendChild( div );
 
-		// Support: IE8
-		// Check if table cells still have offsetWidth/Height when they are set
-		// to display:none and there are still other visible table cells in a
-		// table row; if so, offsetWidth/Height are not reliable for use when
-		// determining if an element has been hidden directly using
-		// display:none (it is still safe to use offsets if a parent element is
-		// hidden; don safety goggles and see bug #4512 for more information).
+		
 		div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
 		tds = div.getElementsByTagName("td");
 		tds[ 0 ].style.cssText = "padding:0;margin:0;border:0;display:none";
