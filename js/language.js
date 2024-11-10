@@ -1,6 +1,6 @@
 lang_de = {
   "%joyride_info1": "Dies ist ein SQL-Injection-Lernspiel. Mit SQL-Injections (dt. SQL-Einschleusung) kann man Websites hacken, indem man durch das Einschleusen von SQL-Code beliebige Daten in der Datenbank ändern, löschen oder auslesen kann.", 
-  "%joyride_info2": "Diese Sicherheitslücke ist oft in Anwendungen zu finden, in denen keine Prepared Statements verwendet werden.Da wir dies aus Lernzwecken nicht verwenden, ist hier fast alles möglich!<br> <br> In SQL-Insekten lernst du von Level zu Level wie Hacker diese Sicherheitslücke ausnutzen, dabei wären Vorkenntisse in SQL empfehlenswert.",
+  "%joyride_info2": "Diese Sicherheitslücke ist oft in Anwendungen zu finden, in denen keine Prepared Statements verwendet werden.Da wir dies aus Lernzwecken nicht verwenden, ist hier fast alles möglich!<br> <br> In SQL-Injection lernst du von Level zu Level wie Hacker diese Sicherheitslücke ausnutzen, dabei wären Vorkenntisse in SQL empfehlenswert.",
   "%joyride_login": "In diesem ersten Level haben wir hier ein Login-Formular, wie man es so von anderen Websiten kennt.",
   "%joyride_details": "Unter dem Button 'Hintergrunddetails anzeigen' kannst du dir die live-erzeugte SQL-Query anschauen und den Programmcode der Anwendung.",
   "%joyride_hints1": "Einen Tipp kannst du dir hier bei dem Button anzeigen lassen.",
@@ -13,7 +13,7 @@ lang_de = {
 
 lang_en = {
   "%joyride_info1": "This is an SQL-injection learning game. SQL injections allow you to hack websites by changing, deleting or reading arbitrary data in the database by injecting SQL code.", 
-  "%joyride_info2": "This vulnerability is often found in applications that do not use Prepared Statements. Since we do not use them in this game (for learning purposes ;-), almost anything is possible here!<br> <br> In SQL Insekten, you will learn from level to level how hackers exploit this vulnerability. Prior knowledge in SQL is recommended.",
+  "%joyride_info2": "This vulnerability is often found in applications that do not use Prepared Statements. Since we do not use them in this game (for learning purposes ;-), almost anything is possible here!<br> <br> In SQL Injection, you will learn from level to level how hackers exploit this vulnerability. Prior knowledge in SQL is recommended.",
   "%joyride_login": "In this first level, you see a login form, as you know it from other websites.",
   "%joyride_details": "When clicking the 'Show background details' button, it shows you the generated SQL query as well as the application's program code.",
   "%joyride_hints1": "You can see a hint here when clicking this button.",
