@@ -891,9 +891,8 @@ jQuery.ready.promise = function( obj ) {
 
 		readyList = jQuery.Deferred();
 
-		// Catch cases where $(document).ready() is called after the browser event has already occurred.
-		// we once tried to use readyState "interactive" here, but it caused issues like the one
-		// discovered by ChrisS here: http://bugs.jquery.com/ticket/12282#comment:15
+
+	
 		if ( document.readyState === "complete" ) {
 			// Handle it asynchronously to allow scripts the opportunity to delay ready
 			setTimeout( jQuery.ready );
@@ -927,7 +926,7 @@ jQuery.ready.promise = function( obj ) {
 					if ( !jQuery.isReady ) {
 
 						try {
-							// Use the trick by Diego Perini
+							
 							// http://javascript.nwbox.com/IEContentLoaded/
 							top.doScroll("left");
 						} catch(e) {
@@ -1274,19 +1273,13 @@ function createCache() {
 	return cache;
 }
 
-/**
- * Mark a function for special use by Sizzle
- * @param {Function} fn The function to mark
- */
+
 function markFunction( fn ) {
 	fn[ expando ] = true;
 	return fn;
 }
 
-/**
- * Support testing using an element
- * @param {Function} fn Passed the created div and expects a boolean result
- */
+
 function assert( fn ) {
 	var div = document.createElement("div");
 
@@ -1506,10 +1499,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		return div.getElementsByClassName("i").length === 2;
 	});
 
-	// Support: IE<10
-	// Check if getElementById returns elements by name
-	// The broken getElementById methods don't pick up programatically-set names,
-	// so use a roundabout getElementsByName test
+	
 	support.getById = assert(function( div ) {
 		docElem.appendChild( div ).id = expando;
 		return !doc.getElementsByName || !doc.getElementsByName( expando ).length;
@@ -2015,7 +2005,7 @@ Expr = Sizzle.selectors = {
 				match[2] = unquoted.slice( 0, excess );
 			}
 
-			// Return only captures needed by the pseudo filter method (type and argument)
+			
 			return match.slice( 0, 3 );
 		}
 	},
@@ -2203,7 +2193,7 @@ Expr = Sizzle.selectors = {
 						unmatched = matcher( seed, null, xml, [] ),
 						i = seed.length;
 
-					// Match elements unmatched by `matcher`
+					
 					while ( i-- ) {
 						if ( (elem = unmatched[i]) ) {
 							seed[i] = !(matches[i] = elem);
@@ -2229,13 +2219,7 @@ Expr = Sizzle.selectors = {
 			};
 		}),
 
-		// "Whether an element is represented by a :lang() selector
-		// is based solely on the element's language value
-		// being equal to the identifier C,
-		// or beginning with the identifier C immediately followed by "-".
-		// The matching of C against the element's language value is performed case-insensitively.
-		// The identifier C does not have to be a valid language name."
-		// http://www.w3.org/TR/selectors/#lang-pseudo
+		
 		"lang": markFunction( function( lang ) {
 			// lang value must be a valid identifier
 			if ( !ridentifier.test(lang || "") ) {
